@@ -104,7 +104,7 @@
         </ul></div>
       </div>
       <div class="footer__bottom">
-        <span>© ${y} Flamma · Vitrum SL. Todos los derechos reservados.</span>
+        <span>© ${y} Flamma · Vitrum SL</span>
         <span>Upcycling de botellas de vino · Barcelona</span>
       </div>
     </div></footer>`;
