@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto · Flamma</title>
+<meta name="description" content="Escríbenos para pedidos, regalos, eventos o colaboraciones con bodegas. Velas artesanales Flamma, Barcelona.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+<div data-header></div>
+
+<section class="section">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">Contacto</span>
+      <h1 class="h2">Hablemos</h1>
+      <p class="lead">¿Un pedido, un regalo especial, un evento o una colaboración con tu bodega? Cuéntanos y te respondemos personalmente.</p>
+      <ul style="list-style:none;padding:0;margin:26px 0;display:flex;flex-direction:column;gap:14px">
+        <li><span class="eyebrow" style="margin:0 0 4px">Email</span><br><a data-mail data-mail-txt style="font-size:1.05rem">info@vitrumsl.es</a></li>
+        <li><span class="eyebrow" style="margin:0 0 4px">Teléfono / WhatsApp</span><br><a data-phone style="font-size:1.05rem">+34 648 49 55 91</a></li>
+        <li><span class="eyebrow" style="margin:0 0 4px">Dónde</span><br><span style="font-size:1.05rem">Barcelona, España</span></li>
+      </ul>
+      <div class="notice">¿Eres una bodega? Convertimos tus botellas en tu propia vela co-branded, para tienda, catas o regalo. Escríbenos con el asunto «Bodega».</div>
+    </div>
+    <div class="reveal">
+      <form class="summary" onsubmit="return flammaSendContact(event)">
+        <h3 class="h3" style="font-size:1.4rem;margin-bottom:18px">Escríbenos</h3>
+        <div class="form-grid">
+          <div class="field"><label for="nombre">Nombre</label><input id="nombre" required></div>
+          <div class="field"><label for="apellido">Apellido</label><input id="apellido"></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" required></div>
+        <div class="field"><label for="asunto">Asunto</label>
+          <select id="asunto"><option>Pedido</option><option>Regalo / evento</option><option>Bodega / B2B</option><option>Otro</option></select></div>
+        <div class="field"><label for="msg">Mensaje</label><textarea id="msg" required></textarea></div>
+        <button class="btn btn--gold btn--block" type="submit">Enviar mensaje</button>
+        <p class="muted" style="font-size:.8rem;margin-top:12px">Al enviar aceptas nuestra <a href="/legal/privacidad.html" style="text-decoration:underline">política de privacidad</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="/assets/js/products.js"></script>
+<script src="/assets/js/app.js"></script>
+<script>
+function flammaSendContact(e){
+  e.preventDefault();
+  const g=id=>document.getElementById(id).value;
+  const to=window.FLAMMA_INFO.email;
+  const sub=encodeURIComponent("["+g("asunto")+"] Contacto web de "+g("nombre")+" "+g("apellido"));
+  const body=encodeURIComponent("Nombre: "+g("nombre")+" "+g("apellido")+"\nEmail: "+g("email")+"\n\n"+g("msg"));
+  window.location.href=`mailto:${to}?subject=${sub}&body=${body}`;
+  return false;
+}
+</script>
+</body>
+</html>

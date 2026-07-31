@@ -1,0 +1,87 @@
+FLAMMA · WEB (guía rápida)
+==========================
+
+*** CÓMO SUBIRLA (LEE ESTO, ES DONDE FALLA) ***
+
+ARRASTRA EL ARCHIVO .ZIP TAL CUAL. NO LO DESCOMPRIMAS.
+
+Por qué: si descomprimes y arrastras los archivos sueltos, el navegador
+sube los .html pero SE TRAGA LAS CARPETAS en silencio. Resultado: la web
+sale con textos pero SIN NINGUNA FOTO (assets/ no llega al servidor).
+Eso es exactamente lo que pasó la última vez.
+
+Pasos:
+1. Entra en tu sitio en Netlify > pestaña "Deploys".
+2. Arrastra el .zip a la zona de deploy (sin descomprimir).
+3. Espera a que ponga "Published".
+4. Abre la web y recarga con Ctrl+Shift+R (si no, el navegador
+   te muestra la versión antigua guardada en caché).
+
+COMPROBACIÓN RÁPIDA de que subió bien:
+Abre esta dirección en el navegador:
+   tu-web.netlify.app/assets/img/card/a01.jpg
+Si ves la foto del jazmín, está bien. Si sale "Page not found",
+las carpetas no se han subido: repite arrastrando el .zip.
+
+
+EDITAR SIN SABER PROGRAMAR
+--------------------------
+- Precios y textos de producto ....... assets/js/products.js
+- Fotos de cada aroma ................ campo "img" en products.js
+- "Dónde ya estamos" ................. FLAMMA_PARTNERS en products.js
+     Cada socio: name (nombre), kind (tipo) y logo (archivo de
+     assets/img/brand/ sin .png). Si dejas la lista vacía ( [] )
+     la sección desaparece sola.
+- Logo de marca ...................... assets/img/brand/flame-mask.png
+     Es la llama en blanco sobre transparente y se usa como
+     mascara: el color lo pone el CSS, asi funciona igual en
+     fondo claro y en el navy del pie. El favicon es
+     assets/img/brand/favicon.png
+- Precio de "Tu botella" ............. FLAMMA_CUSTOM en products.js
+     (se actualiza solo en la portada y en la pagina del servicio)
+- Email, teléfono, WhatsApp .......... arriba de assets/js/app.js
+- Menú y pie de página ............... funciones header() y footer() en app.js
+- Catálogo PDF ....................... assets/Catalogo_Flamma_2026.pdf
+     (sustituye el archivo con el mismo nombre y listo)
+
+
+TIPOGRAFÍA
+----------
+Titulares: Lora · Texto: Inter. Se cargan igual en TODAS las páginas.
+Si quieres cambiarlas, están en un solo sitio: la variable --serif y
+--sans al principio de assets/css/styles.css (y el <link> de cada HTML).
+
+
+PENDIENTE ANTES DE COBRAR CON TARJETA
+-------------------------------------
+- Alta fiscal (036) + pasarela de pago (Stripe).
+  Mientras tanto "Finalizar pedido" envía el pedido por WhatsApp y
+  cobras por Bizum/transferencia. Funciona desde hoy.
+- Rellenar los datos [POR COMPLETAR] de las páginas de /legal.
+
+
+
+SCROLLYTELLING (página "Proceso")
+---------------------------------
+La animación que se mueve con el scroll está en assets/js/scrolly.js.
+
+Ahora funciona en modo "svg": una ilustración vectorial dibujada por
+código (ligera, nítida en cualquier pantalla, no gasta datos).
+
+PARA PASARLO A FOTO REAL cuando tengas la secuencia:
+1. Guarda los fotogramas en  assets/img/seq/
+   con nombres correlativos:  flamma_0001.jpg, flamma_0002.jpg, ...
+2. Abre assets/js/scrolly.js y cambia arriba del todo:
+      const MODE = "frames";
+      FRAMES = { count: 120, path:"/assets/img/seq/flamma_{i}.jpg", pad:4 }
+   (pon en "count" el número real de fotogramas que tengas)
+3. Listo. No hay que tocar nada más.
+
+Los textos de cada paso se editan en el array STAGES, al principio
+del mismo archivo. Cada paso lleva ademas un campo "ph" con la FOTO REAL
+que se muestra al lado en esa fase:
+
+   { t:"El corte", d:"...", ph:"m03" }
+
+"ph" es el nombre de un archivo de assets/img/card/ (sin .jpg).
+Para cambiar la foto de una fase, pon ahi otro nombre de esa carpeta.

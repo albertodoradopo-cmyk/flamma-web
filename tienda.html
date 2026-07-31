@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda · Flamma</title>
+<meta name="description" content="La colección Flamma: siete aromas de autor y la versión Original sin aroma, más la edición Magnum. Velas de cera vegetal en botellas de vino recuperadas.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+<div data-header></div>
+
+<section class="section--tight" style="padding-top:clamp(48px,6vw,80px)">
+  <div class="wrap center" style="max-width:680px;margin-inline:auto">
+    <span class="eyebrow center">La colección</span>
+    <h1 class="h2">Elige tu vela</h1>
+    <p class="lead">Siete fragancias y la Original, sin aroma. Todas de 275 g y unas 50 horas de luz, cada una en su botella recuperada y con la picada a la vista.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="prodgrid" id="shop-grid"></div>
+  </div>
+</section>
+
+<!-- Magnum callout -->
+<section class="section--tight">
+  <div class="wrap">
+    <div class="feature reveal">
+      <div class="feature__img"><img src="/assets/img/full/m05.jpg" alt="Vela Magnum de Flamma"></div>
+      <div class="feature__scrim"></div>
+      <div class="feature__inner">
+        <span class="eyebrow">Edición Magnum</span>
+        <h2 class="h2" style="color:var(--paper)">¿Buscas algo más grande?</h2>
+        <p class="lead" style="color:rgba(243,238,228,.9)">500 g, 100 horas y numerada a mano. La pieza de coleccionista de la casa, en cualquiera de nuestras fragancias.</p>
+        <a class="btn btn--gold" href="/magnum.html" style="margin-top:12px">Ver la Magnum</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight band-paper-3">
+  <div class="wrap center">
+    <span class="eyebrow center">Catálogo 2026</span>
+    <h2 class="h3">¿Prefieres verlo todo junto?</h2>
+    <p class="muted" style="max-width:46ch;margin:0 auto 18px">Las fragancias, los formatos y la tarifa para tiendas y bodegas, en un documento.</p>
+    <a class="btn btn--ink" href="/catalogo.html">Ver el catálogo</a>
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="/assets/js/products.js"></script>
+<script src="/assets/js/app.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>flammaRenderGrid("#shop-grid", window.FLAMMA_PRODUCTS));</script>
+</body>
+</html>

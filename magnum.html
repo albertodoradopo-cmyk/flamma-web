@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnum · Flamma</title>
+<meta name="description" content="La edición Magnum de Flamma: 500 g, 100 horas de luz y numerada a mano. Elaborada con una botella magnum recuperada. El doble de cera, el doble de luz.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+<div data-header></div>
+
+<header class="hero" style="min-height:min(74vh,660px)">
+  <div class="hero__img"><img src="/assets/img/full/m06.jpg" alt="Botella de vino recuperada junto a una vela Flamma, mostrando el formato"></div>
+  <div class="hero__scrim"></div>
+  <div class="wrap hero__inner">
+    <span class="eyebrow">Edición Magnum · serie limitada</span>
+    <h1 class="display">Magnum</h1>
+    <p class="hero__lead">La pieza grande de la casa. Nace de una botella magnum recuperada: el doble de cera y el doble de luz.</p>
+  </div>
+</header>
+
+<!-- FICHA -->
+<section class="section">
+  <div class="wrap pd" id="pd"></div>
+</section>
+
+<!-- EL DOBLE DE TODO -->
+<section class="section band-ink">
+  <div class="wrap">
+    <div class="reveal center" style="max-width:620px;margin:0 auto 48px">
+      <span class="eyebrow center">Formato</span>
+      <h2 class="h2" style="color:var(--paper)">El doble de todo</h2>
+      <p class="lead">No es otra vela, es la misma al doble de tamaño. Para mesas largas, salones grandes y regalos que tienen que notarse.</p>
+    </div>
+    <div class="reveal" style="display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(20px,5vw,64px);align-items:center;max-width:820px;margin-inline:auto">
+      <div style="text-align:right">
+        <div class="eyebrow" style="justify-content:flex-end;color:rgba(243,238,228,.55)">Vela estándar</div>
+        <div style="font-family:var(--serif);font-weight:600;font-size:clamp(2rem,4vw,2.9rem);line-height:1.15;color:rgba(243,238,228,.8)">275 g</div>
+        <div style="color:rgba(243,238,228,.6)">~50 horas de luz</div>
+      </div>
+      <div style="width:1px;height:90px;background:rgba(243,238,228,.2)"></div>
+      <div>
+        <div class="eyebrow" style="color:var(--gold-soft)">Magnum</div>
+        <div style="font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5.4vw,3.9rem);line-height:1.1;color:var(--paper)">500 g</div>
+        <div style="color:var(--gold-soft)">~100 horas de luz</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMERADA / REGALO -->
+<section class="section">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">Pieza de colección</span>
+      <h2 class="h2">Numerada a mano, una a una</h2>
+      <p class="lead">Cada Magnum lleva su número escrito a mano. Hacemos pocas, y se nota: es la que enciendes en las ocasiones que lo merecen, o la que regalas cuando quieres quedar bien de verdad.</p>
+      <p class="muted">Disponible en cualquiera de nuestras siete fragancias, o sin aroma en su versión Original. Como cada botella es distinta, no hay dos iguales.</p>
+      <a class="btn btn--ink" href="/contacto.html" style="margin-top:8px">Consultar para regalo o evento</a>
+    </div>
+    <div class="split__media reveal"><img src="/assets/img/full/m02.jpg" alt="Vela Flamma presentada como regalo"></div>
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="/assets/js/products.js"></script>
+<script src="/assets/js/app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const u=new URL(location); u.searchParams.set("id","magnum"); history.replaceState(null,"",u);
+  flammaRenderProduct();
+});
+</script>
+</body>
+</html>
