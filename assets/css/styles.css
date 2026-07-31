@@ -415,3 +415,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
   touch-action:pan-y;user-select:none}
 
+
+/* Historia: tipografía unificada en toda la explicación */
+.story p{font-family:var(--serif);color:var(--ink-80)}
+.story p+p{margin-top:1.05rem}
+.story .lead{font-size:clamp(1.12rem,1.6vw,1.32rem)}
