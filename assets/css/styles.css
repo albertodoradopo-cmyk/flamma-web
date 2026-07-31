@@ -412,3 +412,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   .lbl-wrap{grid-template-columns:1fr}
   .lbl-preview{position:relative;top:0;order:-1}
 }
+
+/* ---- botella 3D interactiva ---- */
+.bottle3d{width:100%;max-width:520px;height:460px;margin:24px auto 0;
+  touch-action:pan-y;user-select:none}
+@media (max-width:600px){.bottle3d{height:360px}}
