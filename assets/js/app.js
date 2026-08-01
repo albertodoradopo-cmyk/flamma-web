@@ -62,6 +62,7 @@
         ${link("/tu-botella.html","Tu botella")}
         ${link("/magnum.html","Magnum")}
         ${link("/proceso.html","Proceso")}
+        ${link("/sostenibilidad.html","Sostenibilidad")}
         ${link("/historia.html","Historia")}
         ${link("/contacto.html","Contacto")}
       </div>
@@ -90,6 +91,7 @@
         <div><h4>Casa</h4><ul>
           <li><a href="/historia.html">Historia</a></li>
           <li><a href="/proceso.html">Proceso</a></li>
+          <li><a href="/sostenibilidad.html">Sostenibilidad</a></li>
           <li><a href="/catalogo.html">Catálogo</a></li>
           <li><a href="/contacto.html">Contacto</a></li>
           <li><a href="/contacto.html">Bodegas &amp; B2B</a></li>
