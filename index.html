@@ -29,6 +29,17 @@
       s.type='video/mp4';
       v.insertBefore(s, v.firstChild);
       v.load();
+      var poster = mobile?'/assets/img/full/hero-poster-v.jpg':'/assets/img/full/hero-poster.jpg';
+      function still(){
+        if(v.dataset.f) return; v.dataset.f=1;
+        var img=new Image();
+        img.src=poster;
+        img.alt='Vela Flamma encendida junto a una botella de vino';
+        img.className='hero__video hero__still';
+        v.replaceWith(img);
+      }
+      var pr=v.play();
+      if(pr && pr.then){ pr.catch(still); }
     })();
     </script>
   </div>

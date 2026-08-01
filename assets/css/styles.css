@@ -440,3 +440,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   .hero__img--live img{animation:none}
   .hero__glow{animation:none;opacity:.6}
 }
+
+/* Fallback del hero cuando el navegador bloquea el autoplay (p.ej. iOS bajo consumo) */
+.hero__still{
+  animation:heroKen 24s ease-in-out infinite alternate;
+  transform-origin:60% 45%;
+}
+@media (prefers-reduced-motion:reduce){ .hero__still{animation:none} }
