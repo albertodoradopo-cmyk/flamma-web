@@ -62,11 +62,11 @@ window.FLAMMA_PRODUCTS = [
 /* Magnum · pieza mayor, numerada a mano. Ancla de la colección. */
 window.FLAMMA_MAGNUM = {
   id:"magnum", no:"Edición Magnum", name:"Magnum", common:"Serie limitada", price:39,
-  family:"500 g · 100 h",
-  notes:["500 g","100 horas","Numerada a mano"],
-  sub:"El doble de cera, el doble de luz",
-  desc:"Sale de una botella magnum, la grande. El doble de cera y unas 100 horas de luz. Para salones amplios, mesas largas y para cuando el regalo tiene que notarse. Va numerada a mano y la hacemos en cualquiera de las siete fragancias, o sin aroma.",
-  img:"r05"
+  family:"500 g · 75 h",
+  notes:["500 g","75 horas","Numerada a mano"],
+  sub:"El doble de cera, muchas más horas de luz",
+  desc:"Sale de una botella magnum, la grande. El doble de cera y unas 75 horas de luz. Para salones amplios, mesas largas y para cuando el regalo tiene que notarse. Va numerada a mano y la hacemos en cualquiera de las siete fragancias, o sin aroma.",
+  img:"mag2"
 };
 
 /* Especificaciones compartidas */
@@ -79,7 +79,7 @@ window.FLAMMA_SPECS = {
     ["Origen","Hecho a mano en Barcelona"]
   ],
   magnum:[
-    ["Formato","500 g · ~100 horas"],
+    ["Formato","500 g · ~75 horas"],
     ["Serie","Numerada a mano, una a una"],
     ["Cera","100% vegetal (5% coco)"],
     ["Mecha","Algodón"],
