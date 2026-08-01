@@ -17,9 +17,20 @@
 <header class="hero">
   <div class="hero__img hero__img--live">
     <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/assets/img/full/hero-poster.jpg">
-      <source src="/assets/video/hero.mp4" type="video/mp4">
       <img src="/assets/img/full/m01.jpg" alt="Vela Flamma encendida junto a una botella de vino">
     </video>
+    <script>
+    (function(){
+      var v=document.currentScript.previousElementSibling;
+      var mobile=window.matchMedia('(max-width:640px)').matches;
+      v.setAttribute('poster', mobile?'/assets/img/full/hero-poster-v.jpg':'/assets/img/full/hero-poster.jpg');
+      var s=document.createElement('source');
+      s.src=mobile?'/assets/video/hero-vertical.mp4':'/assets/video/hero.mp4';
+      s.type='video/mp4';
+      v.insertBefore(s, v.firstChild);
+      v.load();
+    })();
+    </script>
   </div>
   <div class="hero__scrim"></div>
   <div class="wrap hero__inner">
