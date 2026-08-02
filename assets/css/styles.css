@@ -447,3 +447,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   transform-origin:60% 45%;
 }
 @media (prefers-reduced-motion:reduce){ .hero__still{animation:none} }
+
+/* Selector de color de botella (ficha de producto) */
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.swatch{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font-family:var(--sans);font-size:.85rem;color:var(--ink-80);transition:border-color .15s,box-shadow .15s}
+.swatch span{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.15);flex:none}
+.swatch--verde span{background:#4b5a2a}
+.swatch--marron span{background:#6b4a2b}
+.swatch--azul span{background:#2f5a86}
+.swatch.is-sel{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.swatch:disabled{opacity:.5;cursor:not-allowed;text-decoration:line-through}
