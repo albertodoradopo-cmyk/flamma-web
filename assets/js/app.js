@@ -162,13 +162,14 @@
           ${window.FLAMMA_PRODUCTS.map(x=>`<option value="${x.name}">${x.name}${x.common?` · ${x.common}`:""}</option>`).join("")}
         </select></div>` : "";
     let selColor="Verde";
-    const colorOpts = isMag ? [["Verde","verde",true],["Marrón","marron",true]]
-                            : [["Verde","verde",true],["Marrón","marron",true],["Azul","azul",false]];
-    const colorField = `<div class="field" style="max-width:420px">
+    const colorOpts = isMag ? [["Verde","verde","ok"],["Marrón","marron","ok"]]
+                            : [["Verde","verde","ok"],["Marrón","marron","ok"],["Azul","azul","limited"]];
+    const colorField = `<div class="field" style="max-width:440px">
         <label>Color de la botella</label>
         <div class="swatches" id="colors">
-          ${colorOpts.map(([lbl,suf,av],i)=>`<button type="button" class="swatch swatch--${suf}${i===0?" is-sel":""}" data-suf="${suf}" data-lbl="${lbl}"${av?"":" disabled"}><span></span>${lbl}${av?"":" · Agotado"}</button>`).join("")}
-        </div></div>`;
+          ${colorOpts.map(([lbl,suf,st],i)=>`<button type="button" class="swatch swatch--${suf}${i===0?" is-sel":""}" data-suf="${suf}" data-lbl="${lbl}" data-st="${st}"><span></span>${lbl}</button>`).join("")}
+        </div>
+        <p id="colnote" class="colnote" hidden>Azul · Edición limitada — sin stock ahora mismo.</p></div>`;
     document.title=`${p.name} · Flamma`;
     document.querySelector("#pd").innerHTML=`
       <div class="pd__media reveal"><img id="pdimg" src="${imgFull(p.img+'-verde')}" onerror="this.onerror=null;this.src='${imgFull(p.img)}'" alt="Vela Flamma ${p.name}"></div>
@@ -196,15 +197,21 @@
     document.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>{
       let v=parseInt(qtyEl.value)||1;v+= b.dataset.q==="+"?1:-1;qtyEl.value=Math.max(1,v);
     }));
+    const buyBtn=document.querySelector("#buy");
+    const colNote=document.querySelector("#colnote");
     document.querySelectorAll("#colors .swatch").forEach(sw=>sw.addEventListener("click",()=>{
-      if(sw.disabled)return;
       document.querySelectorAll("#colors .swatch").forEach(s=>s.classList.remove("is-sel"));
       sw.classList.add("is-sel"); selColor=sw.dataset.lbl;
       const im=document.querySelector("#pdimg");
       im.onerror=function(){this.onerror=null;this.src=imgFull(p.img);};
       im.src=imgFull(p.img+"-"+sw.dataset.suf);
+      const limited=sw.dataset.st==="limited";
+      if(colNote) colNote.hidden=!limited;
+      buyBtn.disabled=limited;
+      buyBtn.textContent=limited?"Sin stock · edición limitada":"Añadir a la cesta";
     }));
-    document.querySelector("#buy").addEventListener("click",()=>{
+    buyBtn.addEventListener("click",()=>{
+      if(buyBtn.disabled)return;
       const qty=Math.max(1,parseInt(qtyEl.value)||1);
       const frag=isMag?document.querySelector("#frag").value:null;
       const parts=[selColor]; if(frag)parts.unshift(frag);

@@ -457,3 +457,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .swatch--azul span{background:#2f5a86}
 .swatch.is-sel{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
 .swatch:disabled{opacity:.5;cursor:not-allowed;text-decoration:line-through}
+
+/* Nota de edición limitada (azul) en la ficha */
+.colnote{font-size:.82rem;font-style:italic;color:#8a6a2c;margin-top:10px}
