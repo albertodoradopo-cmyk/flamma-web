@@ -109,5 +109,6 @@ window.FLAMMA_SHIP = { flat:4.90, freeFrom:60 };
 window.FLAMMA_PARTNERS = [
   { name:"Cellers Augustus Forum", kind:"Bodega · Penedès", logo:"p-augustus" },
   { name:"Recaredo",               kind:"Corpinnat · Des de 1924", logo:"p-recaredo" },
-  { name:"Bosque de Matasnos",     kind:"Bodega · Ribera del Duero", logo:"p-matasnos" }
+  { name:"Bosque de Matasnos",     kind:"Bodega · Ribera del Duero", logo:"p-matasnos" },
+  { name:"Conde de Valicourt",     kind:"Cava · Des de 1940", logo:"p-valicourt" }
 ];
