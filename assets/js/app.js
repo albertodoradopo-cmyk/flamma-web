@@ -313,6 +313,8 @@
       document.querySelector("#ck-msg").textContent="Introduce los datos de tu tarjeta:";
       SumUpCard.mount({checkoutId:data.id,locale:"es-ES",onResponse:(type)=>{
         if(type==="success"){
+          const orderItems=c.map(i=>({qty:i.qty,name:i.name,lineTotal:money(i.price*i.qty)}));
+          fetch("/.netlify/functions/send-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({checkoutId:data.id,customer:{nombre,email,tel,dir,cp,ciudad},items:orderItems,total:money(total)})}).catch(()=>{});
           saveCart([]);
           document.querySelector("#cart").innerHTML=`<div class="wrap" style="max-width:560px;margin-inline:auto;text-align:center">
             <h2 class="h3">¡Gracias, ${nombre.split(" ")[0]}! 🕯️</h2>
