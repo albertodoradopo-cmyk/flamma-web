@@ -44,7 +44,7 @@
     if (!r.ok || !data.id) { log("❌ No se obtuvo checkout. Mira el punto 3 para ver por qué."); return; }
     log("✅ 4) Checkout creado: " + data.id + " — montando el formulario de tarjeta…");
     try {
-      SumUpCard.mount({ id: data.id, onResponse: (type, body) => log("Pago → " + type + ": " + JSON.stringify(body)) });
+      SumUpCard.mount({ id: data.id, checkoutId: data.id, locale: "es-ES", onResponse: (type, body) => log("Pago → " + type + ": " + JSON.stringify(body)) });
     } catch (e) { log("❌ Error al montar el formulario: " + e); }
   })();
 </script>
