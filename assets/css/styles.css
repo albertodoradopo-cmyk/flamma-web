@@ -460,3 +460,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 /* Nota de edición limitada (azul) en la ficha */
 .colnote{font-size:.82rem;font-style:italic;color:#8a6a2c;margin-top:10px}
+
+/* Formulario de datos de envío en el checkout */
+.ck-form input{width:100%;padding:11px 13px;margin-top:10px;border:1px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:.95rem;background:#fff;color:var(--ink)}
+.ck-form input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}

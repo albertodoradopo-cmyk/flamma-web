@@ -258,7 +258,7 @@
         <div class="summary__row"><span>Envío</span><span>${shipTxt}</span></div>
         <div class="summary__row summary__row--total"><span>Total</span><span>${money(sub+shipCost)}</span></div>
         <button class="btn btn--gold btn--block" id="checkout" style="margin-top:18px">Finalizar pedido</button>
-        <p class="muted" style="font-size:.82rem;margin-top:14px">Al finalizar nos envías el pedido y te confirmamos disponibilidad y forma de pago. El pago con tarjeta online se activará muy pronto.</p>
+        <p class="muted" style="font-size:.82rem;margin-top:14px">Pago seguro con tarjeta. En el siguiente paso introduces tus datos de envío.</p>
       </div>
     </div>`;
     root.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{const c=getCart();c.splice(+b.dataset.rm,1);saveCart(c);flammaRenderCart();});
@@ -267,16 +267,62 @@
     document.querySelector("#checkout").onclick=checkout;
   };
 
-  /* ---------- checkout (interino: email/WhatsApp; luego pasarela) ---------- */
+  /* ---------- checkout: datos de envío + cobro con tarjeta (SumUp) ---------- */
   function checkout(){
     const c=getCart();if(!c.length)return;
     const sub=cartSubtotal();const ship=window.FLAMMA_SHIP;
     const shipCost=sub>=ship.freeFrom?0:ship.flat;
-    let body="Hola Flamma, quiero hacer este pedido:%0A%0A";
-    c.forEach(i=>{body+=`• ${i.qty} × ${i.name}: ${money(i.price*i.qty)}%0A`;});
-    body+=`%0ASubtotal: ${money(sub)}%0AEnvío: ${shipCost?money(shipCost):"Gratis"}%0ATotal: ${money(sub+shipCost)}%0A%0AMis datos (nombre, dirección, teléfono):%0A`;
-    // WhatsApp primero (más rápido para ellos); alternativa mailto en el botón de contacto
-    window.location.href=`https://wa.me/${FLAMMA.whatsapp}?text=${body}`;
+    const total=sub+shipCost;
+    const root=document.querySelector("#cart");
+    root.innerHTML=`<div class="wrap" style="max-width:560px;margin-inline:auto">
+      <h2 class="h3" style="font-size:1.4rem">Datos de envío</h2>
+      <div id="ck-msg" style="font-size:.85rem;margin:8px 0 14px;color:#8a2020"></div>
+      <div class="ck-form">
+        <input id="ck-nombre" placeholder="Nombre y apellidos" autocomplete="name">
+        <input id="ck-email" type="email" placeholder="Email" autocomplete="email">
+        <input id="ck-tel" placeholder="Teléfono" autocomplete="tel">
+        <input id="ck-dir" placeholder="Dirección (calle, número, piso)" autocomplete="street-address">
+        <div style="display:flex;gap:10px">
+          <input id="ck-cp" placeholder="Código postal" autocomplete="postal-code" style="flex:0 0 42%">
+          <input id="ck-ciudad" placeholder="Ciudad" autocomplete="address-level2" style="flex:1">
+        </div>
+      </div>
+      <div class="summary__row summary__row--total" style="margin-top:18px"><span>Total</span><span>${money(total)}</span></div>
+      <button class="btn btn--gold btn--block" id="ck-pay" style="margin-top:14px">Pagar ${money(total)}</button>
+      <div id="sumup-card" style="margin-top:18px"></div>
+      <p class="muted" style="font-size:.8rem;margin-top:14px"><a href="/carrito.html">← Volver a la cesta</a></p>
+    </div>`;
+    document.querySelector("#ck-pay").onclick=()=>payNow(c,total);
+  }
+
+  async function payNow(c,total){
+    const val=id=>(document.querySelector(id).value||"").trim();
+    const nombre=val("#ck-nombre"),email=val("#ck-email"),tel=val("#ck-tel"),dir=val("#ck-dir"),cp=val("#ck-cp"),ciudad=val("#ck-ciudad");
+    const msg=document.querySelector("#ck-msg");
+    if(!nombre||!email||!tel||!dir||!cp||!ciudad){msg.textContent="Rellena todos los datos de envío, por favor.";return;}
+    const btn=document.querySelector("#ck-pay");btn.disabled=true;btn.textContent="Preparando el pago…";msg.textContent="";
+    const items=c.map(i=>`${i.qty}x ${i.name}`).join(", ");
+    let desc=`FLAMMA | ${nombre} | ${dir}, ${cp} ${ciudad} | tel ${tel} | ${email} | ${items}`;
+    if(desc.length>250)desc=desc.slice(0,250);
+    try{
+      const r=await fetch("/.netlify/functions/create-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({amount:total,description:desc})});
+      const data=await r.json();
+      if(!r.ok||!data.id){msg.textContent="No se pudo iniciar el pago. Reinténtalo o escríbenos por WhatsApp.";btn.disabled=false;btn.textContent=`Pagar ${money(total)}`;return;}
+      btn.style.display="none";
+      document.querySelector("#ck-msg").style.color="";
+      document.querySelector("#ck-msg").textContent="Introduce los datos de tu tarjeta:";
+      SumUpCard.mount({checkoutId:data.id,locale:"es-ES",onResponse:(type)=>{
+        if(type==="success"){
+          saveCart([]);
+          document.querySelector("#cart").innerHTML=`<div class="wrap" style="max-width:560px;margin-inline:auto;text-align:center">
+            <h2 class="h3">¡Gracias, ${nombre.split(" ")[0]}! 🕯️</h2>
+            <p class="lead">Tu pedido está pagado. Te escribiremos a <b>${email}</b> y preparamos el envío a ${ciudad}.</p>
+            <a class="btn btn--ghost" href="/tienda.html" style="margin-top:12px">Seguir mirando</a>
+          </div>`;
+          window.scrollTo({top:0,behavior:"smooth"});
+        }
+      }});
+    }catch(e){msg.textContent="Error de conexión. Inténtalo de nuevo.";btn.disabled=false;btn.textContent=`Pagar ${money(total)}`;}
   }
 
   /* ---------- dónde ya estamos ---------- */
