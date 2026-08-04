@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba de pago · Flamma</title>
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  body{background:var(--paper,#f3eee4)}
+  .paybox{max-width:520px;margin:40px auto;padding:0 20px}
+  #sumup-card{margin-top:20px}
+  .msg{margin-top:16px;padding:12px 14px;border-radius:8px;font-family:var(--sans,sans-serif);font-size:.9rem}
+  .ok{background:#e7f4ea;color:#1c5a2c}
+  .err{background:#fbe9e9;color:#8a2020}
+</style>
+</head>
+<body>
+<div class="paybox">
+  <h1 class="display" style="font-size:1.8rem">Prueba de pago — 1&nbsp;€</h1>
+  <p class="lead">Esto es solo una prueba para comprobar que el cobro funciona de punta a punta. Paga 1&nbsp;€ con una tarjeta real; luego lo reembolsas desde SumUp.</p>
+  <div id="status" class="msg" style="display:none"></div>
+  <div id="sumup-card"></div>
+</div>
+
+<script src="https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js"></script>
+<script>
+  const status = document.getElementById("status");
+  function show(msg, cls){ status.style.display="block"; status.className="msg "+cls; status.textContent=msg; }
+
+  async function init(){
+    try{
+      const r = await fetch("/.netlify/functions/create-checkout", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ amount: 1.00, description:"Prueba Flamma 1€" })
+      });
+      const data = await r.json();
+      if(!r.ok || !data.id){
+        show("No se pudo crear el cobro: " + (JSON.stringify(data.detail||data.error||data)), "err");
+        return;
+      }
+      SumUpCard.mount({
+        id: data.id,
+        onResponse: function(type, body){
+          if(type === "success"){ show("¡Pago correcto! Ya funciona el cobro en tu web.", "ok"); }
+          else if(type === "error"){ show("Error en el pago: " + JSON.stringify(body), "err"); }
+        }
+      });
+    }catch(e){
+      show("Error de conexión: " + e, "err");
+    }
+  }
+  init();
+</script>
+</body>
+</html>
