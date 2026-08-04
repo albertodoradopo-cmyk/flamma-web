@@ -112,3 +112,8 @@ window.FLAMMA_PARTNERS = [
   { name:"Bosque de Matasnos",     kind:"Bodega · Ribera del Duero", logo:"p-matasnos" },
   { name:"Conde de Valicourt",     kind:"Cava · Des de 1940", logo:"p-valicourt" }
 ];
+
+/* Códigos de descuento. type:"pct" (porcentaje) o "eur" (importe fijo en €). */
+window.FLAMMA_PROMOS = {
+  "BIENVENIDA10": { type:"pct", value:10 }
+};

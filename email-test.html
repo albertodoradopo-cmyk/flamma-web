@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Prueba de emails · Flamma</title>
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+  body{background:#f3eee4}.box{max-width:520px;margin:40px auto;padding:0 20px}
+  input{width:100%;padding:11px 13px;margin-top:10px;border:1px solid #d8cfbb;border-radius:8px;font-size:.95rem}
+  #r{margin-top:16px;font-family:monospace;font-size:13px;background:#fff;padding:10px;border-radius:8px;word-break:break-word}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1 class="display" style="font-size:1.6rem">Prueba de emails de pedido</h1>
+  <p class="lead">Envía un pedido de PRUEBA (sin pagar) para comprobar que llegan los correos. Pon aquí un email tuyo para recibir el "resumen del cliente"; el aviso de dueño irá a tu ORDER_EMAIL.</p>
+  <input id="to" type="email" placeholder="tu-email-de-prueba@ejemplo.com">
+  <button class="btn btn--gold btn--block" id="go" style="margin-top:14px">Enviar pedido de prueba</button>
+  <div id="r"></div>
+</div>
+<script>
+  document.getElementById("go").onclick = async () => {
+    const to = (document.getElementById("to").value || "").trim();
+    const r = document.getElementById("r");
+    if(!to){ r.textContent = "Escribe un email de prueba."; return; }
+    r.textContent = "Enviando…";
+    const body = {
+      checkoutId: "PRUEBA-" + Date.now(),
+      customer: { nombre:"Cliente de Prueba", email:to, tel:"600 00 00 00", dir:"Calle de Ejemplo 1", cp:"08001", ciudad:"Barcelona" },
+      items: [ { qty:2, name:"Jasminum · Verde", lineTotal:"42,00 €" }, { qty:1, name:"Magnum", lineTotal:"39,00 €" } ],
+      total: "81,00 €"
+    };
+    try {
+      const resp = await fetch("/.netlify/functions/send-order", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
+      r.textContent = "HTTP " + resp.status + " → " + (await resp.text());
+    } catch(e){ r.textContent = "Error: " + e; }
+  };
+</script>
+</body>
+</html>

@@ -5,8 +5,8 @@
   /* ---- datos de contacto (editar aquí) ---- */
   const FLAMMA = {
     email:"info@vitrumsl.es",
-    phone:"+34 648 49 55 91",
-    whatsapp:"34648495591",
+    phone:"+34 711 202 823",
+    whatsapp:"34711202823",
     instagram:"", facebook:"", tiktok:""   // sin perfiles todavía
   };
   window.FLAMMA_INFO = FLAMMA;
@@ -272,7 +272,9 @@
     const c=getCart();if(!c.length)return;
     const sub=cartSubtotal();const ship=window.FLAMMA_SHIP;
     const shipCost=sub>=ship.freeFrom?0:ship.flat;
-    const total=sub+shipCost;
+    const promos=window.FLAMMA_PROMOS||{};
+    let discount=0, code="";
+    const totalNow=()=>Math.max(0,sub-discount)+shipCost;
     const root=document.querySelector("#cart");
     root.innerHTML=`<div class="wrap" style="max-width:560px;margin-inline:auto">
       <h2 class="h3" style="font-size:1.4rem">Datos de envío</h2>
@@ -287,22 +289,45 @@
           <input id="ck-ciudad" placeholder="Ciudad" autocomplete="address-level2" style="flex:1">
         </div>
       </div>
-      <div class="summary__row summary__row--total" style="margin-top:18px"><span>Total</span><span>${money(total)}</span></div>
-      <button class="btn btn--gold btn--block" id="ck-pay" style="margin-top:14px">Pagar ${money(total)}</button>
+      <div class="ck-form" style="display:flex;gap:8px">
+        <input id="ck-promo" placeholder="Código de descuento" style="flex:1;text-transform:uppercase">
+        <button class="btn btn--ghost" id="ck-apply" type="button" style="margin-top:10px;white-space:nowrap">Aplicar</button>
+      </div>
+      <div id="ck-promo-msg" style="font-size:.82rem;margin-top:6px"></div>
+      <div class="summary__row" style="margin-top:14px"><span>Subtotal</span><span>${money(sub)}</span></div>
+      <div class="summary__row" id="ck-disc" style="display:none"><span class="disc-label">Descuento</span><span>−0</span></div>
+      <div class="summary__row"><span>Envío</span><span>${shipCost?money(shipCost):"Gratis"}</span></div>
+      <div class="summary__row summary__row--total"><span>Total</span><span id="ck-total">${money(totalNow())}</span></div>
+      <button class="btn btn--gold btn--block" id="ck-pay" style="margin-top:14px">Pagar ${money(totalNow())}</button>
       <div id="sumup-card" style="margin-top:18px"></div>
       <p class="muted" style="font-size:.8rem;margin-top:14px"><a href="/carrito.html">← Volver a la cesta</a></p>
     </div>`;
-    document.querySelector("#ck-pay").onclick=()=>payNow(c,total);
+    function refresh(){
+      document.querySelector("#ck-total").textContent=money(totalNow());
+      document.querySelector("#ck-pay").textContent="Pagar "+money(totalNow());
+      const d=document.querySelector("#ck-disc");
+      if(discount>0){d.style.display="";d.querySelector(".disc-label").textContent="Descuento "+code;d.querySelector("span:last-child").textContent="−"+money(discount);}
+      else d.style.display="none";
+    }
+    document.querySelector("#ck-apply").onclick=()=>{
+      const v=(document.querySelector("#ck-promo").value||"").trim().toUpperCase();
+      const m=document.querySelector("#ck-promo-msg");const p=promos[v];
+      if(!v)return;
+      if(!p){discount=0;code="";m.textContent="Código no válido.";m.style.color="#8a2020";refresh();return;}
+      discount=p.type==="pct"?Math.round(sub*p.value)/100:Math.min(p.value,sub);
+      code=v;m.textContent="Código "+v+" aplicado.";m.style.color="#1c5a2c";refresh();
+    };
+    document.querySelector("#ck-pay").onclick=()=>payNow(c,totalNow(),code);
   }
 
-  async function payNow(c,total){
+  async function payNow(c,total,promoCode){
     const val=id=>(document.querySelector(id).value||"").trim();
     const nombre=val("#ck-nombre"),email=val("#ck-email"),tel=val("#ck-tel"),dir=val("#ck-dir"),cp=val("#ck-cp"),ciudad=val("#ck-ciudad");
     const msg=document.querySelector("#ck-msg");
     if(!nombre||!email||!tel||!dir||!cp||!ciudad){msg.textContent="Rellena todos los datos de envío, por favor.";return;}
     const btn=document.querySelector("#ck-pay");btn.disabled=true;btn.textContent="Preparando el pago…";msg.textContent="";
     const items=c.map(i=>`${i.qty}x ${i.name}`).join(", ");
-    let desc=`FLAMMA | ${nombre} | ${dir}, ${cp} ${ciudad} | tel ${tel} | ${email} | ${items}`;
+    let desc=`FLAMMA | ${nombre} | ${dir}, ${cp} ${ciudad} | tel ${tel} | ${email} | ${items}${promoCode?" | cupón "+promoCode:""}`;
     if(desc.length>250)desc=desc.slice(0,250);
     try{
       const r=await fetch("/.netlify/functions/create-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({amount:total,description:desc})});

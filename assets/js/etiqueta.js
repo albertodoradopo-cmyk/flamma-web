@@ -9,7 +9,7 @@
   "use strict";
 
   const F = window.FLAMMA || {};
-  const WA = F.whatsapp || "34648495591";
+  const WA = F.whatsapp || "34711202823";
   const MAIL = F.email || "info@vitrumsl.es";
 
   const CAMPOS = [
