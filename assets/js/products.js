@@ -115,5 +115,6 @@ window.FLAMMA_PARTNERS = [
 
 /* Códigos de descuento. type:"pct" (porcentaje) o "eur" (importe fijo en €). */
 window.FLAMMA_PROMOS = {
-  "BIENVENIDA10": { type:"pct", value:10 }
+  "BIENVENIDA10": { type:"pct", value:10 },
+  "FAMILIAVITRUM": { type:"pct", value:45 }
 };
