@@ -464,3 +464,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Formulario de datos de envío en el checkout */
 .ck-form input{width:100%;padding:11px 13px;margin-top:10px;border:1px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:.95rem;background:#fff;color:var(--ink)}
 .ck-form input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+
+/* Captura de email en el footer */
+.footer__nl{display:flex;flex-wrap:wrap;align-items:center;gap:16px 40px;padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid rgba(255,255,255,.14)}
+.footer__nl-txt{flex:1 1 260px}
+.footer__nl h4{margin:0 0 4px}
+.nl-form{display:flex;gap:10px;flex:1 1 320px;flex-wrap:wrap}
+.nl-form input{flex:1 1 180px;padding:11px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-family:var(--sans);font-size:.95rem}
+.nl-form input::placeholder{color:rgba(255,255,255,.5)}
+.nl-msg{flex:1 1 100%;font-size:.85rem;min-height:1em}

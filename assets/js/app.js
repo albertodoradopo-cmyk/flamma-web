@@ -77,6 +77,11 @@
   function footer(){
     const y=new Date().getFullYear();
     return `<footer class="footer"><div class="wrap">
+      <div class="footer__nl">
+        <div class="footer__nl-txt"><h4>Llévate un 10%</h4><p class="footer__note">Suscríbete y te mandamos tu código de bienvenida (−10%) y alguna novedad de vez en cuando. Sin spam.</p></div>
+        <div class="nl-form"><input id="nl-email" type="email" placeholder="Tu email" autocomplete="email"><button class="btn btn--gold" id="nl-btn" type="button">Suscribirme</button></div>
+        <span id="nl-msg" class="nl-msg"></span>
+      </div>
       <div class="footer__grid">
         <div>
           <a class="brand" href="/index.html">${punt(30)}<span><b>Flamma</b><small>Barcelona</small></span></a>
@@ -103,6 +108,7 @@
           <li><a href="/legal/privacidad.html">Privacidad</a></li>
           <li><a href="/legal/cookies.html">Cookies</a></li>
           <li><a href="/legal/envios-devoluciones.html">Envíos y devoluciones</a></li>
+          <li><a href="/faq.html">Preguntas frecuentes</a></li>
         </ul></div>
       </div>
       <div class="footer__bottom">
@@ -388,6 +394,21 @@
     document.querySelectorAll("[data-wa]").forEach(a=>a.href=`https://wa.me/${FLAMMA.whatsapp}`);
     document.querySelectorAll("[data-mail-txt]").forEach(a=>a.textContent=FLAMMA.email);
     document.querySelectorAll("[data-phone]").forEach(a=>{a.href="tel:"+FLAMMA.phone.replace(/\s/g,"");a.textContent=FLAMMA.phone;});
+    // captura de email (newsletter -10%)
+    const nlBtn=document.querySelector("#nl-btn");
+    if(nlBtn){
+      nlBtn.addEventListener("click",async()=>{
+        const email=(document.querySelector("#nl-email").value||"").trim();
+        const m=document.querySelector("#nl-msg");
+        if(!/.+@.+\..+/.test(email)){m.textContent="Pon un email válido.";m.style.color="#c98a2a";return;}
+        nlBtn.disabled=true;m.textContent="Enviando…";m.style.color="";
+        try{
+          const r=await fetch("/.netlify/functions/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email})});
+          if(r.ok){m.textContent="¡Listo! Revisa tu email, ahí está tu −10%.";m.style.color="#dfe7d8";document.querySelector("#nl-email").value="";}
+          else{m.textContent="No se pudo, inténtalo de nuevo.";m.style.color="#e6b7b7";nlBtn.disabled=false;}
+        }catch(e){m.textContent="Error de conexión.";m.style.color="#e6b7b7";nlBtn.disabled=false;}
+      });
+    }
     // servicio "Tu botella"
     const C=window.FLAMMA_CUSTOM||{};
     document.querySelectorAll("[data-custom-price]").forEach(e=>{if(C.price)e.textContent=C.price;});
