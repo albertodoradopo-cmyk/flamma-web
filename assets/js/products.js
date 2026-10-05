@@ -123,7 +123,7 @@ window.FLAMMA_PROMOS = {
 /* Campaña de Navidad. La web se decora sola entre start y end.
    Para verla antes de tiempo: añade ?navidad a cualquier URL. */
 window.FLAMMA_XMAS = {
-  start:"2026-11-15T00:00:00+01:00",
+  start:"2026-10-05T00:00:00+02:00",
   end:"2026-12-18T23:59:59+01:00",
   code:"NAVIDAD",
   packs:{ duo:40, trio:60, empresaUd:17, empresaMin:10 }
