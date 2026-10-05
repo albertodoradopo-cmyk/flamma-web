@@ -116,5 +116,15 @@ window.FLAMMA_PARTNERS = [
 /* Códigos de descuento. type:"pct" (porcentaje) o "eur" (importe fijo en €). */
 window.FLAMMA_PROMOS = {
   "BIENVENIDA10": { type:"pct", value:10 },
-  "FAMILIAVITRUM": { type:"pct", value:45 }
+  "FAMILIAVITRUM": { type:"pct", value:45 },
+  "NAVIDAD": { type:"ship", until:"2026-12-18T23:59:59+01:00" }
+};
+
+/* Campaña de Navidad. La web se decora sola entre start y end.
+   Para verla antes de tiempo: añade ?navidad a cualquier URL. */
+window.FLAMMA_XMAS = {
+  start:"2026-11-15T00:00:00+01:00",
+  end:"2026-12-18T23:59:59+01:00",
+  code:"NAVIDAD",
+  packs:{ duo:40, trio:60, empresaUd:17, empresaMin:10 }
 };

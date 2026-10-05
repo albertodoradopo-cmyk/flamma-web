@@ -15,6 +15,15 @@
   const money=n=>n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
   const imgFull=r=>`/assets/img/full/${r}.jpg`;
   const imgCard=r=>`/assets/img/card/${r}.jpg`;
+  /* ---------- campaña de Navidad ---------- */
+  function xmasOn(){
+    const X=window.FLAMMA_XMAS;if(!X)return false;
+    let prev=false;
+    try{if(new URLSearchParams(location.search).has("navidad"))sessionStorage.setItem("fx","1");prev=sessionStorage.getItem("fx")==="1";}catch(e){}
+    const now=new Date();
+    return now<=new Date(X.end)&&(prev||now>=new Date(X.start));
+  }
+  window.flammaXmasOn=xmasOn;
   window.flammaMoney=money;
 
   /* ---------- picada (firma) ---------- */
@@ -54,10 +63,11 @@
   /* ---------- header / footer inject ---------- */
   function header(){
     const link=(href,txt)=>`<a href="${href}" ${location.pathname===href?'aria-current="page"':''}>${txt}</a>`;
-    return `<div class="ticker">Envío gratis a partir de <b>60&nbsp;€</b> · Hecho a mano en Barcelona</div>
+    return `${xmasOn()?`<div class="ticker ticker--xmas">Navidad: pide antes del <b>18 de diciembre</b> y llega a tiempo. Envío gratis con el código <b>NAVIDAD</b>. <a href="/navidad.html">Ideas de regalo</a></div>`:`<div class="ticker">Envío gratis a partir de <b>60&nbsp;€</b> · Hecho a mano en Barcelona</div>`}
     <nav class="nav" id="nav"><div class="wrap"><div class="nav__bar">
       <a class="brand" href="/index.html">${punt(30,true)}<span><b>Flamma</b><small>Barcelona</small></span></a>
       <div class="nav__links">
+        ${xmasOn()?link("/navidad.html","Navidad"):""}
         ${link("/tienda.html","Tienda")}
         ${link("/tu-botella.html","Tu botella")}
         ${link("/magnum.html","Magnum")}
@@ -277,7 +287,8 @@
   function checkout(){
     const c=getCart();if(!c.length)return;
     const sub=cartSubtotal();const ship=window.FLAMMA_SHIP;
-    const shipCost=sub>=ship.freeFrom?0:ship.flat;
+    let shipCost=sub>=ship.freeFrom?0:ship.flat;
+    const baseShip=shipCost;
     const promos=window.FLAMMA_PROMOS||{};
     let discount=0, code="";
     const totalNow=()=>Math.max(0,sub-discount)+shipCost;
@@ -295,6 +306,9 @@
           <input id="ck-ciudad" placeholder="Ciudad" autocomplete="address-level2" style="flex:1">
         </div>
       </div>
+      <div class="ck-form">
+        <textarea id="ck-nota" maxlength="200" rows="2" placeholder="¿Es para regalar? Escribe aquí la nota y la escribimos a mano (opcional)"></textarea>
+      </div>
       <div class="ck-form" style="display:flex;gap:8px">
         <input id="ck-promo" placeholder="Código de descuento" style="flex:1;text-transform:uppercase">
         <button class="btn btn--ghost" id="ck-apply" type="button" style="margin-top:10px;white-space:nowrap">Aplicar</button>
@@ -302,7 +316,7 @@
       <div id="ck-promo-msg" style="font-size:.82rem;margin-top:6px"></div>
       <div class="summary__row" style="margin-top:14px"><span>Subtotal</span><span>${money(sub)}</span></div>
       <div class="summary__row" id="ck-disc" style="display:none"><span class="disc-label">Descuento</span><span>−0</span></div>
-      <div class="summary__row"><span>Envío</span><span>${shipCost?money(shipCost):"Gratis"}</span></div>
+      <div class="summary__row"><span>Envío</span><span id="ck-ship">${shipCost?money(shipCost):"Gratis"}</span></div>
       <div class="summary__row summary__row--total"><span>Total</span><span id="ck-total">${money(totalNow())}</span></div>
       <button class="btn btn--gold btn--block" id="ck-pay" style="margin-top:14px">Pagar ${money(totalNow())}</button>
       <div id="sumup-card" style="margin-top:18px"></div>
@@ -311,6 +325,7 @@
     function refresh(){
       document.querySelector("#ck-total").textContent=money(totalNow());
       document.querySelector("#ck-pay").textContent="Pagar "+money(totalNow());
+      document.querySelector("#ck-ship").textContent=shipCost?money(shipCost):"Gratis";
       const d=document.querySelector("#ck-disc");
       if(discount>0){d.style.display="";d.querySelector(".disc-label").textContent="Descuento "+code;d.querySelector("span:last-child").textContent="−"+money(discount);}
       else d.style.display="none";
@@ -319,8 +334,10 @@
       const v=(document.querySelector("#ck-promo").value||"").trim().toUpperCase();
       const m=document.querySelector("#ck-promo-msg");const p=promos[v];
       if(!v)return;
-      if(!p){discount=0;code="";m.textContent="Código no válido.";m.style.color="#8a2020";refresh();return;}
-      discount=p.type==="pct"?Math.round(sub*p.value)/100:Math.min(p.value,sub);
+      if(!p||(p.until&&new Date()>new Date(p.until))){discount=0;shipCost=baseShip;code="";m.textContent=p?"Este código ya ha caducado.":"Código no válido.";m.style.color="#8a2020";refresh();return;}
+      shipCost=baseShip;discount=0;
+      if(p.type==="ship"){shipCost=0;}
+      else discount=p.type==="pct"?Math.round(sub*p.value)/100:Math.min(p.value,sub);
       code=v;m.textContent="Código "+v+" aplicado.";m.style.color="#1c5a2c";refresh();
     };
     document.querySelector("#ck-pay").onclick=()=>payNow(c,totalNow(),code);
@@ -329,11 +346,12 @@
   async function payNow(c,total,promoCode){
     const val=id=>(document.querySelector(id).value||"").trim();
     const nombre=val("#ck-nombre"),email=val("#ck-email"),tel=val("#ck-tel"),dir=val("#ck-dir"),cp=val("#ck-cp"),ciudad=val("#ck-ciudad");
+    const nota=(document.querySelector("#ck-nota")||{value:""}).value.trim();
     const msg=document.querySelector("#ck-msg");
     if(!nombre||!email||!tel||!dir||!cp||!ciudad){msg.textContent="Rellena todos los datos de envío, por favor.";return;}
     const btn=document.querySelector("#ck-pay");btn.disabled=true;btn.textContent="Preparando el pago…";msg.textContent="";
     const items=c.map(i=>`${i.qty}x ${i.name}`).join(", ");
-    let desc=`FLAMMA | ${nombre} | ${dir}, ${cp} ${ciudad} | tel ${tel} | ${email} | ${items}${promoCode?" | cupón "+promoCode:""}`;
+    let desc=`FLAMMA | ${nombre} | ${dir}, ${cp} ${ciudad} | tel ${tel} | ${email} | ${items}${promoCode?" | cupón "+promoCode:""}${nota?" | nota: "+nota:""}`;
     if(desc.length>250)desc=desc.slice(0,250);
     try{
       const r=await fetch("/.netlify/functions/create-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({amount:total,description:desc})});
@@ -345,7 +363,7 @@
       SumUpCard.mount({checkoutId:data.id,locale:"es-ES",onResponse:(type)=>{
         if(type==="success"){
           const orderItems=c.map(i=>({qty:i.qty,name:i.name,lineTotal:money(i.price*i.qty)}));
-          fetch("/.netlify/functions/send-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({checkoutId:data.id,customer:{nombre,email,tel,dir,cp,ciudad},items:orderItems,total:money(total)})}).catch(()=>{});
+          fetch("/.netlify/functions/send-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({checkoutId:data.id,customer:{nombre,email,tel,dir,cp,ciudad,nota},items:orderItems,total:money(total)})}).catch(()=>{});
           saveCart([]);
           document.querySelector("#cart").innerHTML=`<div class="wrap" style="max-width:560px;margin-inline:auto;text-align:center">
             <h2 class="h3">¡Gracias, ${nombre.split(" ")[0]}! 🕯️</h2>
@@ -394,6 +412,7 @@
     document.querySelectorAll("[data-wa]").forEach(a=>a.href=`https://wa.me/${FLAMMA.whatsapp}`);
     document.querySelectorAll("[data-mail-txt]").forEach(a=>a.textContent=FLAMMA.email);
     document.querySelectorAll("[data-phone]").forEach(a=>{a.href="tel:"+FLAMMA.phone.replace(/\s/g,"");a.textContent=FLAMMA.phone;});
+    if(xmasOn())document.querySelectorAll("[data-xmas]").forEach(e=>e.hidden=false);
     // captura de email (newsletter -10%)
     const nlBtn=document.querySelector("#nl-btn");
     if(nlBtn){

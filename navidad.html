@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regalos de Navidad · Flamma</title>
+<meta name="description" content="Velas hechas a mano en Barcelona con botellas de vino recuperadas. Packs para regalar, buscador de regalo y regalo de empresa. Pide antes del 18 de diciembre.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="xmas-page">
+<div data-header></div>
+
+<section class="xm-hero">
+  <div class="wrap xm-hero__grid">
+    <div class="xm-hero__text">
+      <p class="xm-kicker">Navidad 2026</p>
+      <h1 class="display xm-title">Regala algo que ya tuvo otra vida</h1>
+      <p class="lead">Velas de cera vegetal hechas a mano en Barcelona, cada una con el vidrio de una botella de vino recuperada. Ninguna sale igual que otra.</p>
+      <div class="xm-countdown" data-countdown>
+        <span class="xm-countdown__label">Para que llegue antes de Navidad, pide en los próximos</span>
+        <div class="xm-countdown__nums">
+          <div><b data-cd="d">0</b><small>días</small></div>
+          <div><b data-cd="h">0</b><small>horas</small></div>
+          <div><b data-cd="m">0</b><small>min</small></div>
+        </div>
+        <span class="xm-countdown__foot">Último día de pedido: 18 de diciembre</span>
+      </div>
+      <div class="xm-hero__cta">
+        <a class="btn btn--gold" href="#elegir">Ayúdame a elegir</a>
+        <a class="btn btn--ghost" href="#packs">Ver los packs</a>
+      </div>
+    </div>
+    <figure class="xm-hero__img">
+      <img src="/assets/img/full/mag3.jpg" alt="Vela Magnum de Flamma encendida en una mesa junto a una copa de vino">
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="elegir">
+  <div class="wrap xm-quiz" data-quiz>
+    <div class="xm-quiz__head">
+      <h2 class="h2">No sabes qué aroma regalar</h2>
+      <p class="lead">Tres preguntas y te decimos cuál. Lo que más pesa al elegir una vela es el olor, y por internet no se puede oler, así que te guiamos por el ambiente que le pega a esa persona.</p>
+    </div>
+    <div class="xm-quiz__box" aria-live="polite">
+      <div class="xm-step" data-step="1">
+        <p class="xm-q"><span>1 de 3</span>¿Para quién es?</p>
+        <div class="xm-opts">
+          <button type="button" data-k="who" data-v="pareja">Mi pareja</button>
+          <button type="button" data-k="who" data-v="familia">Alguien de la familia</button>
+          <button type="button" data-k="who" data-v="amigo">Un amigo o amiga</button>
+          <button type="button" data-k="who" data-v="anfitrion">Quien me invita a cenar</button>
+          <button type="button" data-k="who" data-v="empresa">Clientes o equipo de trabajo</button>
+        </div>
+      </div>
+      <div class="xm-step" data-step="2" hidden>
+        <p class="xm-q"><span>2 de 3</span>¿Qué ambiente le pega a su casa?</p>
+        <div class="xm-opts">
+          <button type="button" data-k="mood" data-v="fresco">Fresco y limpio</button>
+          <button type="button" data-k="mood" data-v="floral">Floral y suave</button>
+          <button type="button" data-k="mood" data-v="calido">Cálido, de invierno</button>
+          <button type="button" data-k="mood" data-v="nada">Nada de olor, solo la luz</button>
+        </div>
+      </div>
+      <div class="xm-step" data-step="3" hidden>
+        <p class="xm-q"><span>3 de 3</span>¿Cuánto quieres gastar?</p>
+        <div class="xm-opts">
+          <button type="button" data-k="budget" data-v="1">Unos 20 €</button>
+          <button type="button" data-k="budget" data-v="2">Unos 40 €</button>
+          <button type="button" data-k="budget" data-v="3">Unos 60 €, con envío gratis</button>
+        </div>
+      </div>
+      <div class="xm-result" data-result hidden></div>
+    </div>
+  </div>
+</section>
+
+<section class="section xm-packs" id="packs">
+  <div class="wrap">
+    <h2 class="h2">Packs para regalar</h2>
+    <p class="lead xm-sub">Eliges los aromas, nosotros los preparamos en su caja. Si es para regalar, en el pago puedes dejarnos una nota y la escribimos a mano.</p>
+    <div class="xm-pack-grid">
+      <article class="xm-pack" data-pack="duo">
+        <img src="/assets/img/full/m08.jpg" alt="Velas Flamma en su caja de cartón" loading="lazy">
+        <div class="xm-pack__body">
+          <h3>Dúo para regalar</h3>
+          <p class="xm-price"><b>40 €</b> <span data-sep></span></p>
+          <p>Dos velas de 275 g, unas 50 horas cada una.</p>
+          <div class="xm-selects" data-n="2"></div>
+          <label class="xm-color">Vidrio
+            <select data-color><option>Verde</option><option>Marrón</option></select>
+          </label>
+          <button class="btn btn--gold btn--block" type="button" data-add>Añadir a la cesta</button>
+        </div>
+      </article>
+      <article class="xm-pack xm-pack--main" data-pack="trio">
+        <img src="/assets/img/full/m09.jpg" alt="Tres velas Flamma en vidrio verde, marrón y azul" loading="lazy">
+        <div class="xm-pack__body">
+          <p class="xm-flag">Envío gratis</p>
+          <h3>Trío Flamma</h3>
+          <p class="xm-price"><b>60 €</b> <span data-sep></span></p>
+          <p>Tres velas de 275 g en su caja. El regalo que se reparte en casa: una para el salón, otra para el dormitorio y otra para la cocina.</p>
+          <div class="xm-selects" data-n="3"></div>
+          <label class="xm-color">Vidrio
+            <select data-color><option>Verde</option><option>Marrón</option></select>
+          </label>
+          <button class="btn btn--gold btn--block" type="button" data-add>Añadir a la cesta</button>
+        </div>
+      </article>
+      <article class="xm-pack" data-pack="empresa">
+        <img src="/assets/img/full/m02.jpg" alt="Vela Flamma dentro de su caja de regalo" loading="lazy">
+        <div class="xm-pack__body">
+          <h3>Regalo de empresa</h3>
+          <p class="xm-price"><b>17 €</b> + IVA por vela, desde 10</p>
+          <p>Para clientes o equipo. Ponemos vuestro logo o un mensaje en la etiqueta y lo enviamos listo para repartir. Pide antes del 30 de noviembre para tenerlo a tiempo.</p>
+          <a class="btn btn--gold btn--block" data-wa-empresa target="_blank" rel="noopener">Pedir presupuesto por WhatsApp</a>
+          <a class="btn btn--ghost btn--block" data-mail-empresa style="margin-top:8px">O escríbenos un email</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section xm-trust">
+  <div class="wrap xm-trust__grid">
+    <div><h3>Fecha clara</h3><p>Pedidos hasta el 18 de diciembre llegan antes de Navidad en península. Envío en 2 a 5 días laborables.</p></div>
+    <div><h3>Lo ves todo antes de pagar</h3><p>Envío 4,90 €, gratis desde 60 € o con el código NAVIDAD. Sin sorpresas en el último paso.</p></div>
+    <div><h3>Nota escrita a mano</h3><p>Déjanos el mensaje al pagar y lo escribimos a mano dentro de la caja.</p></div>
+    <div><h3>Pago seguro</h3><p>Pago con tarjeta procesado por SumUp. No guardamos los datos de tu tarjeta.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap faq" style="max-width:760px;margin-inline:auto">
+    <h2 class="h2">Antes de pedir</h2>
+    <details><summary>¿Hasta cuándo puedo pedir para Navidad?</summary><p>Hasta el 18 de diciembre para entregas en península. Después seguimos enviando, pero no podemos garantizar que llegue antes del 25.</p></details>
+    <details><summary>¿Puedo regalar una botella con historia?</summary><p>Sí. Con <a href="/tu-botella.html">Tu botella</a> convertimos la botella de una boda, un aniversario o una cena especial en vela. Lo hablamos por WhatsApp porque cada caso es distinto.</p></details>
+    <details><summary>¿Y si al final no le gusta el aroma?</summary><p>Tienes 14 días para devolverla sin usar. Y si dudas, la Original no lleva perfume: es la que nunca falla.</p></details>
+    <details><summary>¿Cuánto dura una vela?</summary><p>Unas 50 horas la de 275 g. Corta la mecha a 5 mm antes de cada uso y deja que la primera vez se funda hasta el borde.</p></details>
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="/assets/js/products.js"></script>
+<script src="/assets/js/app.js"></script>
+<script>
+(function(){
+  const X=window.FLAMMA_XMAS||{end:"2026-12-18T23:59:59+01:00",packs:{duo:40,trio:60}};
+  const P=window.FLAMMA_PRODUCTS||[];
+  const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+  const money=window.flammaMoney||(n=>n.toFixed(2).replace(".",",")+" €");
+  const add=window.flammaAdd;
+  const WA="34711202823";
+
+  /* cuenta atrás */
+  const end=new Date(X.end);
+  const cd=document.querySelector("[data-countdown]");
+  function tick(){
+    const ms=end-new Date();
+    if(ms<=0){cd.innerHTML='<span class="xm-countdown__label">Ya no podemos garantizar la entrega antes de Navidad, pero seguimos enviando.</span>';return;}
+    const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);
+    cd.querySelector('[data-cd="d"]').textContent=d;
+    cd.querySelector('[data-cd="h"]').textContent=h;
+    cd.querySelector('[data-cd="m"]').textContent=m;
+  }
+  tick();setInterval(tick,30000);
+
+  /* packs */
+  const opts=P.map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
+  const defaults={duo:["lavandula","cinnamomum"],trio:["citrus","jasminum","cinnamomum"]};
+  document.querySelectorAll("[data-pack]").forEach(card=>{
+    const kind=card.dataset.pack;
+    const box=card.querySelector(".xm-selects");if(!box)return;
+    const n=+box.dataset.n;
+    box.innerHTML=Array.from({length:n},(_,i)=>`<label>Vela ${i+1}<select data-a>${opts}</select></label>`).join("");
+    box.querySelectorAll("select").forEach((s,i)=>{s.value=(defaults[kind]||[])[i]||P[i].id;});
+    const price=X.packs[kind];
+    const sep=card.querySelector("[data-sep]");
+    function upd(){
+      const sum=[...box.querySelectorAll("select")].reduce((t,s)=>t+(byId[s.value]?.price||0),0);
+      const save=sum-price;
+      sep.textContent=save>0?`por separado ${money(sum)}, ahorras ${money(save)}`:"";
+    }
+    box.addEventListener("change",upd);upd();
+    card.querySelector("[data-add]").addEventListener("click",()=>{
+      const ids=[...box.querySelectorAll("select")].map(s=>s.value);
+      const color=card.querySelector("[data-color]").value;
+      const names=ids.map(i=>byId[i].name).join(" + ");
+      const label=kind==="duo"?"Dúo para regalar":"Trío Flamma";
+      add&&add({id:"pack-"+kind,name:`${label}: ${names} · ${color}`,price,img:byId[ids[0]].img,variant:ids.join("+")+"+"+color});
+    });
+  });
+
+  /* regalo de empresa */
+  const msgE=encodeURIComponent("Hola Flamma, queremos velas de regalo para nuestra empresa. Somos ___ y necesitaríamos unas ___ unidades para el día ___. ¿Podéis poner nuestro logo en la etiqueta?");
+  document.querySelectorAll("[data-wa-empresa]").forEach(a=>a.href=`https://wa.me/${WA}?text=${msgE}`);
+  document.querySelectorAll("[data-mail-empresa]").forEach(a=>a.href="mailto:info@vitrumsl.es?subject="+encodeURIComponent("Regalo de empresa Flamma"));
+
+  /* buscador de regalo */
+  const quiz=document.querySelector("[data-quiz]");
+  const ans={};
+  const MOODS={
+    fresco:{ids:["citrus","lavandula"],txt:"Algo fresco y limpio, que no canse."},
+    floral:{ids:["jasminum","orchidaceae","rosa"],txt:"Floral pero suave, para tener encendida sin que agobie."},
+    calido:{ids:["cinnamomum","bursera"],txt:"Cálida y de invierno, la que huele a casa en diciembre."},
+    nada:{ids:["original"],txt:"Sin perfume: solo la luz y el vidrio. La que nunca falla."}
+  };
+  function show(step){quiz.querySelectorAll("[data-step]").forEach(s=>s.hidden=s.dataset.step!==String(step));}
+  function card(p){return `<a class="xm-rec" href="/producto.html?id=${p.id}"><img src="/assets/img/card/${p.img}.jpg" alt="Vela Flamma ${p.name}"><span><b>${p.name}</b><small>${p.common||""} · ${money(p.price)}</small></span></a>`;}
+  function result(){
+    const r=quiz.querySelector("[data-result]");
+    if(ans.who==="empresa"){
+      r.innerHTML=`<p class="xm-q">Para clientes o equipo, lo que mejor funciona es el regalo de empresa</p>
+      <p>Desde 10 velas a 17 € + IVA, con vuestro logo o mensaje en la etiqueta. Cuéntanos cuántas necesitas y para cuándo.</p>
+      <div class="xm-hero__cta"><a class="btn btn--gold" href="https://wa.me/${WA}?text=${msgE}" target="_blank" rel="noopener">Pedir presupuesto</a><button class="btn btn--ghost" type="button" data-restart>Empezar de nuevo</button></div>`;
+    }else{
+      const m=MOODS[ans.mood];const recs=m.ids.map(i=>byId[i]).filter(Boolean);
+      const b=+ans.budget;
+      let fmt="";
+      if(b===1)fmt=`<p>Con unos 20 € te llega para una vela. Te recomendamos esta:</p>`;
+      if(b===2)fmt=`<p>Con unos 40 € encaja el <a href="#packs">Dúo para regalar</a>: estas dos le van a gustar.</p>`;
+      if(b===3)fmt=`<p>Con unos 60 € va el <a href="#packs">Trío Flamma</a>, con envío gratis. Te dejamos los aromas elegidos en el pack.</p>`;
+      const shown=b===1?recs.slice(0,1):recs;
+      r.innerHTML=`<p class="xm-q">${m.txt}</p>${fmt}<div class="xm-recs">${shown.map(card).join("")}</div>
+      <div class="xm-hero__cta">${b===1&&shown[0]?`<button class="btn btn--gold" type="button" data-addone="${shown[0].id}">Añadir ${shown[0].name}</button>`:`<a class="btn btn--gold" href="#packs" data-fillpack>Ir al pack con estos aromas</a>`}<button class="btn btn--ghost" type="button" data-restart>Empezar de nuevo</button></div>`;
+      const one=r.querySelector("[data-addone]");
+      if(one)one.onclick=()=>{const p=byId[one.dataset.addone];add&&add({id:p.id,name:p.name+" · Verde",price:p.price,img:p.img,variant:"Verde"});};
+      const fill=r.querySelector("[data-fillpack]");
+      if(fill)fill.onclick=()=>{
+        const kind=b===2?"duo":"trio";const sel=document.querySelectorAll(`[data-pack="${kind}"] .xm-selects select`);
+        const pool=recs.map(p=>p.id).concat(["original","lavandula","cinnamomum"]);
+        sel.forEach((s,i)=>{s.value=pool[i%pool.length];});sel[0]&&sel[0].dispatchEvent(new Event("change",{bubbles:true}));
+      };
+    }
+    quiz.querySelectorAll("[data-step]").forEach(s=>s.hidden=true);r.hidden=false;
+    r.querySelector("[data-restart]").onclick=()=>{r.hidden=true;for(const k in ans)delete ans[k];show(1);};
+  }
+  quiz.querySelectorAll("[data-k]").forEach(btn=>btn.addEventListener("click",()=>{
+    ans[btn.dataset.k]=btn.dataset.v;
+    if(btn.dataset.k==="who")return ans.who==="empresa"?result():show(2);
+    if(btn.dataset.k==="mood")return show(3);
+    result();
+  }));
+})();
+</script>
+</body>
+</html>

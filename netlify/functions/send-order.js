@@ -35,6 +35,7 @@ exports.handler = async (event) => {
       <h2 style="color:#1C2733">Nuevo pedido — ${esc(total)}</h2>
       <p><b>${nombre}</b><br>${esc(customer.email)} · ${esc(customer.tel)}<br>${addr}</p>
       <ul>${itemsHtml}</ul>
+      ${customer.nota?`<p><b>Nota de regalo para escribir a mano:</b><br>${esc(customer.nota)}</p>`:""}
       <p style="color:#888;font-size:13px">Ref. de pago: ${esc(checkoutId)}</p></div>`;
 
     const custHtml = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#1C2733">
@@ -44,6 +45,7 @@ exports.handler = async (event) => {
       <ul>${itemsHtml}</ul>
       <p><b>Total: ${esc(total)}</b></p>
       <p>Envío a: ${addr}</p>
+      ${customer.nota?`<p>Tu nota irá escrita a mano: "${esc(customer.nota)}"</p>`:""}
       <p style="margin-top:24px">Con cariño,<br>Flamma Candles · Barcelona</p></div>`;
 
     const send = (to, subject, html, replyTo) =>
