@@ -34,7 +34,8 @@
     if(!data || !data.id){ log("❌ sin id: " + txt); return; }
     log("2) Checkout: " + data.id);
     try {
-      SumUpCard.mount({ checkoutId: data.id, onResponse: (type, body) => log("PAGO → " + type + ": " + JSON.stringify(body)) });
+      log("Apple Pay en este navegador: " + (window.ApplePaySession ? "SÍ (canMakePayments=" + ApplePaySession.canMakePayments() + ")" : "NO"));
+      SumUpCard.mount({ checkoutId: data.id, onPaymentMethodsLoad: (m) => { log("MÉTODOS que devuelve SumUp: " + JSON.stringify(m)); return m; }, onResponse: (type, body) => log("PAGO → " + type + ": " + JSON.stringify(body)) });
       log("3) mount() ejecutado sin error");
     } catch(e){ log("❌ mount lanzó error: " + e); return; }
     function inspeccion(t){
