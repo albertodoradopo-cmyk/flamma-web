@@ -178,7 +178,7 @@
           ${window.FLAMMA_PRODUCTS.map(x=>`<option value="${x.name}">${x.name}${x.common?` · ${x.common}`:""}</option>`).join("")}
         </select></div>` : "";
     let selColor="Verde";
-    const colorOpts = isMag ? [["Verde","verde","ok"],["Marrón","marron","ok"]]
+    const colorOpts = isMag ? [["Verde","verde","ok"]]
                             : [["Verde","verde","ok"],["Marrón","marron","ok"],["Azul","azul","limited"]];
     const colorField = `<div class="field" style="max-width:440px">
         <label>Color de la botella</label>
@@ -198,17 +198,23 @@
         <div class="chips">${chips}</div>
         ${colorField}
         ${variant}
-        <div class="pd__buy">
+        ${isMag?`<p class="pd__ondemand">La Magnum se hace bajo pedido y solo en vidrio verde. Dinos el aroma por WhatsApp y te confirmamos plazo y entrega.</p>
+        <div class="pd__buy"><a class="btn btn--gold" id="buy-wa" target="_blank" rel="noopener">Pedir por WhatsApp</a></div>`:`<div class="pd__buy">
           <div class="qty">
             <button type="button" data-q="-">−</button>
             <input id="qty" type="text" value="1" inputmode="numeric" aria-label="Cantidad">
             <button type="button" data-q="+">+</button>
           </div>
           <button class="btn btn--gold" id="buy">Añadir a la cesta</button>
-        </div>
+        </div>`}
         <ul class="pd__specs">${specs}</ul>
         <p class="muted" style="font-size:.86rem">Cada botella es distinta: el tono del vidrio y la picada varían de una pieza a otra. No hay dos velas iguales.</p>
       </div>`;
+    if(isMag){
+      const wa=document.querySelector("#buy-wa"),fr=document.querySelector("#frag");
+      const setWa=()=>{wa.href=`https://wa.me/${FLAMMA.whatsapp}?text=${encodeURIComponent(`Hola Flamma, quiero pedir una vela Magnum (500 g, vidrio verde) con aroma ${fr.value}. ¿Qué plazo tenéis?`)}`;};
+      fr.addEventListener("change",setWa);setWa();observeReveals();return;
+    }
     const qtyEl=document.querySelector("#qty");
     document.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>{
       let v=parseInt(qtyEl.value)||1;v+= b.dataset.q==="+"?1:-1;qtyEl.value=Math.max(1,v);

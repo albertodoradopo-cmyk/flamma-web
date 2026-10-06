@@ -61,11 +61,11 @@ window.FLAMMA_PRODUCTS = [
 
 /* Magnum · pieza mayor, numerada a mano. Ancla de la colección. */
 window.FLAMMA_MAGNUM = {
-  id:"magnum", no:"Edición Magnum", name:"Magnum", common:"Serie limitada", price:39,
+  id:"magnum", no:"Edición Magnum", name:"Magnum", common:"Bajo pedido", price:39,
   family:"500 g · 75 h",
   notes:["500 g","75 horas","Numerada a mano"],
   sub:"El doble de cera, muchas más horas de luz",
-  desc:"Sale de una botella magnum, la grande. El doble de cera y unas 75 horas de luz. Para salones amplios, mesas largas y para cuando el regalo tiene que notarse. Va numerada a mano y la hacemos en cualquiera de las siete fragancias, o sin aroma.",
+  desc:"Sale de una botella magnum, la grande. El doble de cera y unas 75 horas de luz. Para salones amplios, mesas largas y para cuando el regalo tiene que notarse. Va numerada a mano y la hacemos bajo pedido, en vidrio verde, en cualquiera de las siete fragancias o sin aroma. Se pide por WhatsApp.",
   img:"mag2"
 };
 

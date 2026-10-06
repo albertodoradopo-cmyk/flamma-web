@@ -546,3 +546,4 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .btn--xmas{background:var(--pine);color:#F3EEE4;border:1px solid var(--pine)}
 .btn--xmas:hover{background:var(--pine-2);border-color:var(--pine-2)}
 .btn[hidden]{display:none!important}
+.pd__ondemand{background:var(--paper-3);border-left:3px solid var(--gold);padding:10px 14px;font-size:.92rem;color:var(--ink-80);margin:14px 0 4px}
