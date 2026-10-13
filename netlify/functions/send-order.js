@@ -35,6 +35,7 @@ exports.handler = async (event) => {
       <h2 style="color:#1C2733">Nuevo pedido — ${esc(total)}</h2>
       <p><b>${nombre}</b><br>${esc(customer.email)} · ${esc(customer.tel)}<br>${addr}</p>
       <ul>${itemsHtml}</ul>
+      ${customer.cupon?`<p><b>Código usado:</b> ${esc(customer.cupon)}</p>`:""}
       ${customer.nota?`<p><b>Nota de regalo para escribir a mano:</b><br>${esc(customer.nota)}</p>`:""}
       <p style="color:#888;font-size:13px">Ref. de pago: ${esc(checkoutId)}</p></div>`;
 
