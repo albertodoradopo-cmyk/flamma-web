@@ -2,58 +2,58 @@
    Para editar precios o textos, cambia aquí y se actualiza en toda la web. */
 window.FLAMMA_PRODUCTS = [
   {
-    id:"jasminum", no:"No. 01", name:"Jasminum", common:"Jazmín", price:21,
+    id:"jasminum", no:"No. 01", name:"Jazmín", common:"Jasminum", price:21,
     family:"Floral", notes:["Jazmín","Cremoso","Verde fresco"],
-    sub:"Jazmín en flor",
+    sub:"Floral, dulce y envolvente",
     desc:"Jazmín en flor, dulce y con un fondo verde. Llena bastante la habitación, así que con una basta. Va bien en el salón o el dormitorio.",
     img:"a01"
   },
   {
-    id:"lavandula", no:"No. 02", name:"Lavandula Angustifolia", common:"Lavanda", price:21,
+    id:"lavandula", no:"No. 02", name:"Lavanda", common:"Lavandula angustifolia", price:21,
     family:"Herbal", notes:["Lavanda","Herbáceo","Alcanforado"],
-    sub:"Lavanda de verdad",
+    sub:"Herbal, para relajarse",
     desc:"Lavanda de verdad, limpia y un punto alcanforada, no la lavanda dulzona de detergente. La típica para leer o antes de dormir.",
     img:"a02"
   },
   {
-    id:"orchidaceae", no:"No. 03", name:"Orchidaceae", common:"Orquídea", price:21,
+    id:"orchidaceae", no:"No. 03", name:"Orquídea", common:"Orchidaceae", price:21,
     family:"Floral", notes:["Floral exótico","Empolvado","Dulce"],
     sub:"Floral suave y discreto",
     desc:"Floral suave, con un fondo empolvado. Es discreta, no cansa. Para quien no quiere que la casa huela a mucho, solo a limpio y agradable.",
     img:"a03"
   },
   {
-    id:"bursera", no:"No. 04", name:"Bursera Graveolens", common:"Palo Santo", price:21,
+    id:"bursera", no:"No. 04", name:"Palo santo", common:"Bursera graveolens", price:21,
     family:"Amaderado", notes:["Palo santo","Resina","Cítrico"],
-    sub:"Madera y palo santo",
+    sub:"Madera y resina, cálida",
     desc:"Palo santo: madera, algo de resina y un toque cítrico. Cálida y con carácter. La que encienden los que huyen de lo floral.",
     img:"a04"
   },
   {
-    id:"citrus", no:"No. 05", name:"Citrus Bergamia", common:"Bergamota", price:22,
+    id:"citrus", no:"No. 05", name:"Bergamota", common:"Citrus bergamia", price:22,
     family:"Cítrico", notes:["Bergamota","Chispeante","Floral ligero"],
-    sub:"Bergamota, cítrico fresco",
+    sub:"Cítrico fresco, para el día",
     desc:"Bergamota: cítrico fresco pero no a limpiacristales, con un fondo un poco floral. La de por la mañana, en la cocina o el estudio.",
     img:"a05"
   },
   {
-    id:"rosa", no:"No. 06", name:"Rosa Rubiginosa", common:"Rosa Mosqueta", price:22,
+    id:"rosa", no:"No. 06", name:"Rosa mosqueta", common:"Rosa rubiginosa", price:22,
     family:"Floral", notes:["Rosa silvestre","Terroso","Cálido"],
-    sub:"Rosa de campo",
+    sub:"Rosa de campo, cálida",
     desc:"Rosa mosqueta, más de campo que de floristería: algo terrosa y cálida. Una rosa para gente a la que no suele gustarle la rosa.",
     img:"a06"
   },
   {
-    id:"cinnamomum", no:"No. 07", name:"Cinnamomum & Aurantium", common:"Naranja y Canela", price:23,
+    id:"cinnamomum", no:"No. 07", name:"Naranja y canela", common:"Cinnamomum & Aurantium", price:23,
     family:"Especiado", notes:["Naranja","Canela","Reconfortante"],
-    sub:"Naranja y canela",
+    sub:"Especiada, huele a Navidad",
     desc:"Naranja y canela. Huele a casa en invierno, a sobremesa. La que más se vende en Navidad, por algo será.",
     img:"a07"
   },
   {
-    id:"original", no:"No. 00", name:"Flamma Original", common:"Sin aroma", price:19,
+    id:"original", no:"No. 00", name:"Sin aroma", common:"Flamma Original", price:19,
     family:"Sin aroma", notes:["Sin fragancia","Cera vegetal","Atemporal"],
-    sub:"Sin aroma, solo la luz",
+    sub:"Solo la luz y el vidrio",
     desc:"Sin aroma. Solo la luz y el vidrio. Para quien es sensible a los perfumes, para una mesa donde ya hay comida, o para regalar sin arriesgar con el olor.",
     img:"a00"
   }

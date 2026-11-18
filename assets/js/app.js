@@ -43,7 +43,7 @@
     const key=item.id+(item.variant?("::"+item.variant):"");
     const ex=c.find(i=>(i.id+(i.variant?("::"+i.variant):""))===key);
     if(ex)ex.qty+=item.qty||1; else c.push({...item,qty:item.qty||1});
-    saveCart(c);toast(`${item.name} añadido a la cesta`);
+    saveCart(c);toast(`${item.name} · en la cesta`,true);
   }
   window.flammaAdd=addToCart;
   function updateCount(){
@@ -53,11 +53,11 @@
 
   /* ---------- toast ---------- */
   let toastEl;
-  function toast(msg){
+  function toast(msg,cart){
     if(!toastEl){toastEl=document.createElement("div");toastEl.className="toast";document.body.appendChild(toastEl);}
-    toastEl.innerHTML=punt(18)+`<span>${msg}</span>`;
+    toastEl.innerHTML=punt(18)+`<span>${msg}</span>`+(cart?`<a class="toast__go" href="/carrito.html">Ver cesta →</a>`:"");
     toastEl.classList.add("show");
-    clearTimeout(toast._t);toast._t=setTimeout(()=>toastEl.classList.remove("show"),2200);
+    clearTimeout(toast._t);toast._t=setTimeout(()=>toastEl.classList.remove("show"),cart?4500:2200);
   }
 
   /* ---------- header / footer inject ---------- */
@@ -175,7 +175,7 @@
     const variant = isMag ? `<div class="field" style="max-width:320px">
         <label for="frag">Fragancia</label>
         <select id="frag">
-          ${window.FLAMMA_PRODUCTS.map(x=>`<option value="${x.name}">${x.name}${x.common?` · ${x.common}`:""}</option>`).join("")}
+          ${window.FLAMMA_PRODUCTS.map(x=>`<option value="${x.name}">${x.name}</option>`).join("")}
         </select></div>` : "";
     let selColor="Verde";
     const colorOpts = isMag ? [["Verde","verde","ok"]]
@@ -206,7 +206,8 @@
             <button type="button" data-q="+">+</button>
           </div>
           <button class="btn btn--gold" id="buy">Añadir a la cesta</button>
-        </div>`}
+        </div>
+        <p class="pd__trust">Envío ${money(FLAMMA_SHIP.flat)} · gratis desde ${FLAMMA_SHIP.freeFrom} € · Pago seguro con tarjeta · Si llega rota, te la reponemos</p>`}
         <ul class="pd__specs">${specs}</ul>
         <p class="muted" style="font-size:.86rem">Cada botella es distinta: el tono del vidrio y la picada varían de una pieza a otra. No hay dos velas iguales.</p>
       </div>`;
@@ -347,6 +348,7 @@
       code=v;m.textContent="Código "+v+" aplicado.";m.style.color="#1c5a2c";refresh();
     };
     document.querySelector("#ck-pay").onclick=()=>payNow(c,totalNow(),code);
+    try{const saved=localStorage.getItem("flamma_promo");if(saved&&promos[saved]){document.querySelector("#ck-promo").value=saved;document.querySelector("#ck-apply").click();}}catch(e){}
   }
 
   async function payNow(c,total,promoCode){

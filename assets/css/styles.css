@@ -547,3 +547,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .btn--xmas:hover{background:var(--pine-2);border-color:var(--pine-2)}
 .btn[hidden]{display:none!important}
 .pd__ondemand{background:var(--paper-3);border-left:3px solid var(--gold);padding:10px 14px;font-size:.92rem;color:var(--ink-80);margin:14px 0 4px}
+
+/* conversión: precio sin cortes, confianza bajo el botón, toast con enlace a la cesta */
+.card__price{white-space:nowrap}
+@media(max-width:480px){.card__price{font-size:1.02rem}.card__foot .add{padding:8px 12px}}
+.pd__trust{font-size:.84rem;color:var(--ink-60);margin:12px 0 0;line-height:1.5}
+.toast.show{pointer-events:auto}
+.toast__go{margin-left:12px;color:var(--gold-soft);text-decoration:underline;white-space:nowrap;font-weight:600}
+.toast{width:max-content;max-width:calc(100vw - 32px)}

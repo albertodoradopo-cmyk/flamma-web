@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Hola · Flamma</title>
+<meta name="description" content="Gracias por encender una Flamma. Cómo cuidar tu vela y un descuento para la siguiente.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+.hola-top{padding:44px 0 8px;text-align:center}
+.hola-top .lead{max-width:520px;margin:10px auto 0}
+.hola-code{max-width:520px;margin:26px auto 0;background:var(--ink);color:var(--paper);border-radius:var(--r);padding:22px 20px;text-align:center}
+.hola-code b{display:inline-block;font-family:var(--serif);font-size:1.6rem;letter-spacing:.08em;color:var(--gold-soft);margin:6px 0 10px;border:1px dashed var(--gold-soft);padding:6px 16px;border-radius:4px;cursor:pointer}
+.hola-code p{margin:0;font-size:.92rem;color:rgba(243,238,228,.85)}
+.hola-code .btn{margin-top:14px}
+.care{max-width:620px;margin:0 auto;display:grid;gap:12px}
+.care li{list-style:none;background:var(--paper-2,#faf6ee);border:1px solid rgba(28,39,51,.08);border-radius:var(--r);padding:14px 16px;font-size:.95rem;color:var(--ink-80)}
+.care li b{color:var(--ink)}
+.care{padding:0}
+</style>
+</head>
+<body>
+<div data-header></div>
+
+<section class="hola-top">
+  <div class="wrap">
+    <span class="eyebrow center">Gracias por encenderla</span>
+    <h1 class="h2">Esta vela fue, antes, una botella de vino</h1>
+    <p class="lead">La recuperamos y la convertimos a mano en Barcelona. Aquí tienes cómo sacarle todas sus horas de luz, y un regalo para la siguiente.</p>
+    <div class="hola-code">
+      <p>Tu próxima Flamma, con un 10% menos</p>
+      <b id="hola-code" title="Toca para copiar">BIENVENIDA10</b>
+      <p>Ya lo tienes guardado: se aplica solo al pagar.</p>
+      <a class="btn btn--gold" href="/tienda.html">Ver los aromas</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:22px">
+      <span class="eyebrow center">Para que dure</span>
+      <h2 class="h3">Cómo cuidar tu vela</h2>
+    </div>
+    <ul class="care">
+      <li><b>La primera vez, déjala encendida 2 o 3 horas</b>, hasta que toda la superficie esté derretida. Así no hace túnel y arde pareja hasta el final.</li>
+      <li><b>Corta la mecha a unos 5 mm</b> antes de cada encendido. La llama queda más limpia y no ahúma el vidrio.</li>
+      <li><b>No la tengas más de 4 horas seguidas</b>, ni cerca de corrientes de aire, cortinas o algo que pueda arder.</li>
+      <li><b>Nunca la dejes encendida sin nadie delante</b>, ni al alcance de niños o mascotas.</li>
+      <li><b>Apágala cuando quede 1 cm de cera.</b> Después, limpia el vidrio con agua caliente: sirve de vaso o maceta.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section band-paper-3">
+  <div class="wrap">
+    <div class="center" style="margin-bottom:28px">
+      <span class="eyebrow center">La colección</span>
+      <h2 class="h2">¿Cuál pruebas ahora?</h2>
+      <p class="lead">Siete aromas y una sin aroma, cada una en su botella recuperada.</p>
+    </div>
+    <div class="prodgrid" id="hola-grid"></div>
+    <div class="center" style="margin-top:34px">
+      <a class="btn btn--ghost" href="/navidad.html" style="margin:4px">Ideas de regalo</a>
+      <a class="btn btn--ghost" href="/tu-botella.html" style="margin:4px">Hazla con tu botella</a>
+    </div>
+  </div>
+</section>
+
+<div data-footer></div>
+<script src="/assets/js/products.js"></script>
+<script src="/assets/js/app.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded",()=>{
+    flammaRenderGrid("#hola-grid", window.FLAMMA_PRODUCTS);
+    try{localStorage.setItem("flamma_promo","BIENVENIDA10");}catch(e){}
+    const c=document.querySelector("#hola-code");
+    c.addEventListener("click",()=>{try{navigator.clipboard.writeText("BIENVENIDA10");c.textContent="¡Copiado!";setTimeout(()=>c.textContent="BIENVENIDA10",1500);}catch(e){}});
+  });
+</script>
+</body>
+</html>
